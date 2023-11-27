@@ -1,0 +1,79 @@
+-- Criação do banco de dados
+CREATE DATABASE IF NOT EXISTS clinica;
+
+
+USE clinica;
+
+-- Tabela de médicos
+CREATE TABLE IF NOT EXISTS medicos
+(
+    id  INT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(255) NOT NULL,
+    cpf VARCHAR(11)  NOT NULL,
+    especialidade VARCHAR(255) DEFAULT NULL,
+    login VARCHAR(255) NOT NULL,
+    senha_hash VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id),
+    UNIQUE KEY login_UNIQUE (login)
+);
+
+-- Tabela de pacientes
+CREATE TABLE IF NOT EXISTS pacientes
+(
+    id INT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(255) NOT NULL,
+    cpf VARCHAR(11)  NOT NULL,
+    login VARCHAR(255) NOT NULL,
+    senha_hash VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id),
+    UNIQUE KEY login_UNIQUE (login)
+);
+
+-- Tabela de senhas
+CREATE TABLE IF NOT EXISTS senhas
+(
+    id INT NOT NULL AUTO_INCREMENT,
+    chave_secreta VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+-- Tabela de valores padrões
+CREATE TABLE IF NOT EXISTS valorespadroes
+(
+    id INT NOT NULL,
+    descricao VARCHAR(255) DEFAULT NULL,
+    limite_superior INT NOT NULL,
+    limite_inferior INT NOT NULL,
+    unidade VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+-- Tabela de cálcio
+CREATE TABLE IF NOT EXISTS calcio
+(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    mg_per_liter VARCHAR(255) NOT NULL
+);
+
+
+-- Inserção de valores na tabela valorespadroes
+INSERT INTO valorespadroes (id,
+ descricao,
+ limite_superior,
+ limite_inferior,
+ unidade)
+VALUES (1,
+        'Normal',
+        100,
+        50,
+        'mg/L'),
+       (2,
+        'Insuficiente',
+        49,
+        30,
+        'mg/L'),
+       (3,
+        'Deficiente',
+        29,
+        20,
+        'mg/L');
